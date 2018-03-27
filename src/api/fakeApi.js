@@ -3,9 +3,11 @@ import { get } from '../utils/httpRequests';
 let users;
 const postLimit=10;
 
-
 export const fetchPosts = (page) =>
 	get('https://jsonplaceholder.typicode.com/posts',{ _start:(page-1)*postLimit, _limit:postLimit});
+
+export const fetchComments = (postId) =>
+	get('https://jsonplaceholder.typicode.com/comments',{ postId:postId});
 
 export const fetchUsers = () =>
 	new Promise((resolve, reject)=>{
