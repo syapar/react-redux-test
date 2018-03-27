@@ -10,7 +10,7 @@ const idsByPage = (state = {}, action) => {
 				[action.page]: [...action.response.result],
 			};
 		case ACTIONS.FETCH_POSTS_FAIL:
-			return true;
+			return state;
 		default:
 			return state;
 	}
