@@ -1,5 +1,49 @@
 .post {
-	>p {
-		color: black;
+	margin: 30px;
+	background-color: #f3f3f3;
+
+	&__container{
+		padding: 20px 20px 0;
+		background-color: #ffffff;
+		box-shadow: 0 1px 4px 0 #dfdfdf;
 	}
+
+	&__user-profile {
+		display: flex;
+		align-items: center;
+
+		> img {
+			padding-right: 20px;
+			width: 50px;
+			height: auto;
+		}
+	}
+
+	&__seperator {
+		margin-left: -20px;
+		margin-right: -20px;
+		border-bottom: solid 1px #efeff3;
+	}
+
+	&__comments-button {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		padding: 15px 0;
+		font-weight: bold;
+
+		&:hover{
+			text-decoration: underline;
+		}
+
+		> img {
+			padding-right: 6px;
+			width: 19px;
+			height: auto;
+		}
+	}
+}
+
+.post--extended {
+	padding-bottom: 10px;
 }
