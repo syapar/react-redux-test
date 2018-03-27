@@ -1,6 +1,5 @@
 import qs from 'querystring';
 
-
 export const post = (url,data) => {
     return new Promise((resolve)=>{
             fetch(url, {
