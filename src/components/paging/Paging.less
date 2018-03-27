@@ -1,0 +1,26 @@
+.paging {
+	display: flex;
+	justify-content: center;
+
+
+	&__button {
+		cursor: pointer;
+		color: #14b7cc;
+		padding-left: 10px;
+		padding-right: 10px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&__button--current {
+		color: @brand_gray;
+		cursor: default;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+}
