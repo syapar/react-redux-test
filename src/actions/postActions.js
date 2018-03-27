@@ -1,21 +1,33 @@
+import { normalize } from 'normalizr';
+import * as schema from './schema';
+import * as api from '../api/fakeApi';
+import { getIsPostsRequested } from '../reducers';
 import * as ActionTypes from '../constants/ActionTypes';
-import { get } from '../utils/httpRequests';
 
-export const getPosts = (userId) => (dispatch) => {
+export const fetchPosts = (page) => (dispatch, getState) => {
+
+	if(getIsPostsRequested(getState())){
+		return Promise.resolve();
+	}
 	dispatch({
-		type:ActionTypes.GET_POSTS_REQUEST,
+		type:ActionTypes.FETCH_POSTS_REQUEST,
+		page
 	});
 
-	return get("https://jsonplaceholder.typicode.com/posts").then((response) => {
+	api.fetchPosts(page).then((response)=>{
 		dispatch({
-			type:ActionTypes.GET_POSTS_SUCCESS,
-			response: response,
+			type:ActionTypes.FETCH_POSTS_SUCCESS,
+			page:page,
+			response: normalize(response, schema.arrayOfPosts),
 		});
-	}).catch((error) => {
+	}).catch((e)=>{
 		dispatch({
-			type:ActionTypes.GET_POSTS_FAIL,
-			message: error.message || 'Something went wrong.',
+			type:ActionTypes.FETCH_POSTS_FAIL,
+			message: e.message || 'Something went wrong.',
 		});
 	});
+
 };
+
+
 

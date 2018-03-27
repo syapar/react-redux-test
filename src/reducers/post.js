@@ -1,15 +1,16 @@
 import * as ACTIONS from '../constants/ActionTypes';
 import { combineReducers } from 'redux';
+import byId, * as fromById from './postById';
 
-const data = (state = {}, action) => {
+const idsByPage = (state = {}, action) => {
 	switch (action.type){
-		case ACTIONS.GET_POSTS_SUCCESS:
+		case ACTIONS.FETCH_POSTS_SUCCESS:
 			return {
 				...state,
-				...action.response,
+				[action.page]: [...action.response.result],
 			};
-		case ACTIONS.GET_POSTS_FAIL:
-			return {};
+		case ACTIONS.FETCH_POSTS_FAIL:
+			return true;
 		default:
 			return state;
 	}
@@ -17,10 +18,10 @@ const data = (state = {}, action) => {
 
 const isPostsRequested = (state = false, action) => {
 	switch (action.type){
-		case ACTIONS.GET_POSTS_SUCCESS:
-		case ACTIONS.GET_POSTS_FAIL:
+		case ACTIONS.FETCH_POSTS_SUCCESS:
+		case ACTIONS.FETCH_POSTS_FAIL:
 			return false;
-		case ACTIONS.GET_POSTS_REQUEST:
+		case ACTIONS.FETCH_POSTS_REQUEST:
 			return true;
 		default:
 			return state;
@@ -29,15 +30,19 @@ const isPostsRequested = (state = false, action) => {
 
 const post = combineReducers(
 	{
-		data,
+		byId,
+		idsByPage,
 		isPostsRequested,
 	}
 );
 
 export default post;
 
-export const getPostsData = (state) =>
-	state.data;
+export const getPostById = (state,id) =>
+	fromById.getPost(state.byId,id);
+
+export const getPosts = (state,page) =>
+	state.idsByPage[page];
 
 export const getIsPostsRequested = (state) =>
 	state.isPostsRequested;
