@@ -1,21 +1,28 @@
+import { normalize } from 'normalizr';
+import * as schema from './schema';
+import * as api from '../api/fakeApi';
 import * as ActionTypes from '../constants/ActionTypes';
-import { get } from '../utils/httpRequests';
+import { getIsUserRequested } from '../reducers';
 
-export const getUser = (userId) => (dispatch) => {
-    dispatch({
-        type:ActionTypes.GET_USER_REQUEST,
-    });
+export const fetchUsers = () => (dispatch, getState) => {
 
-    return get("https://jsonplaceholder.typicode.com/users").then((response) => {
+	if(getIsUserRequested(getState())){
+		return Promise.resolve();
+	}
+	dispatch({
+		type:ActionTypes.FETCH_USER_REQUEST
+	});
+
+	api.fetchUsers().then((response)=>{
 		dispatch({
-			type:ActionTypes.GET_USER_SUCCESS,
-			response: response,
+			type:ActionTypes.FETCH_USER_SUCCESS,
+			response: normalize(response, schema.arrayOfUsers),
 		});
-    }).catch((error) => {
-        dispatch({
-            type:ActionTypes.GET_USER_FAIL,
-            message: error.message || 'Something went wrong.',
-        });
-    });
-};
+	}).catch((e)=>{
+		dispatch({
+			type:ActionTypes.FETCH_USER_FAIL,
+			message: e.message || 'Something went wrong.',
+		});
+	});
 
+};
