@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Post = () => (
+const Post = (data) => (
     <div className="post">
         <p>
-            Post Component
+			{JSON.stringify(data)}
         </p>
     </div>
 );
