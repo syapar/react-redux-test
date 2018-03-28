@@ -4,7 +4,6 @@ const PagingButton = ({buttonText, page, onPageClicked, isCurrentPage}) => {
 
 	const onButtonClicked = (e) => {
 		e.preventDefault();
-
 		if(!isCurrentPage){
 			onPageClicked(page);
 		}
@@ -18,7 +17,5 @@ const PagingButton = ({buttonText, page, onPageClicked, isCurrentPage}) => {
 		</a>
 	);
 }
-
-
 
 export default PagingButton;
