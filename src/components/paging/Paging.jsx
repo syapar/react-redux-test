@@ -1,11 +1,10 @@
 import React from 'react';
 import PagingButton from './PagingButton';
 
-const Paging = ({currentPage, onPageClicked}) => {
+const Paging = ({currentPage, onPageClicked, lastPageIndex}) => {
 
 	const getPageButtons = () => {
 		const reactElements = [];
-		const lastPageIndex = 10;
 
 		if(currentPage>1){
 			reactElements.push(
