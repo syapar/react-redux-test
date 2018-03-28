@@ -54,6 +54,8 @@ const mapDispatchToProps = {
 	fetchComments,
 };
 
+export const PostContainerBase = PostContainer;
+
 export default PostContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps

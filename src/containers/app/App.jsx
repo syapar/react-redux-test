@@ -49,7 +49,11 @@ class App extends Component {
 				<h1>
 					TEST APPLICATION
 				</h1>
-				<Paging currentPage={currentPage} onPageClicked={this.onPageClicked}/>
+				<Paging
+					currentPage={currentPage}
+					onPageClicked={this.onPageClicked}
+					lastPageIndex={10}
+				/>
 				{this.getPostsElements()}
 			</div>
 		);
@@ -68,7 +72,11 @@ const mapDispatchToProps = {
 	fetchPosts,
 };
 
+export const AppBase = App;
+
 export default App = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(App);
+
+
