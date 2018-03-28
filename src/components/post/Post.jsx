@@ -19,7 +19,9 @@ const Post = ({userData, data, onCommentsClicked, comments, isCommentsVisible}) 
 				{data.body}
 			</p>
 			<div className="post__seperator"/>
-			<div className="post__comments-button" onClick={() => onCommentsClicked(data.id)}>
+			<div className="post__comments-button"
+				 onClick={() => onCommentsClicked(data.id)}
+			>
 				<img src={commentIcon} alt="commentIcon"/>
 				Comments
 			</div>
